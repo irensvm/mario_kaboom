@@ -1,7 +1,7 @@
 kaboom({
 	global: true,
 	fullscreen: true,
-	scale: 1,
+	scale: 1.5,
 	debug: true,
 	clearColor: [ 0, 0, 0, 1 ]
 });
@@ -51,9 +51,26 @@ scene('game', () => {
 		'#': [ sprite('mushroom'), solid() ]
 	};
 
-	const gameLevel = addLevel(map, levelCfg);
+    const gameLevel = addLevel(map, levelCfg);
+    
+    const scoreLabel = add([
+        text('test'),
+        pos(30,6),
+        layer('ui'),
+        {
+            value: 'test',
+        }
 
-	const player = add([ sprite('mario'), solid(), pos(30, 0), body(), origin('bot') ]);
+
+    ])
+
+    add([text('level ' + 'test', pos(4,6))])
+
+    const player = add([ sprite('mario'), solid(), pos(30, 0), body(), origin('bot') ]);
+    
+    keyDown('left', ()=> {
+        player.move(120, 0)
+    })
 });
 
 start('game');
