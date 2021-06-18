@@ -1,7 +1,7 @@
 kaboom({
 	global: true,
 	fullscreen: true,
-	scale: 2,
+	scale: 1,
 	debug: true,
 	clearColor: [ 0, 0, 0, 1 ]
 });
@@ -31,24 +31,29 @@ scene('game', () => {
 		'  % =*=%=                                  ',
 		'                                           ',
 		'                                           ',
-		'                              -+           ',
-		'                          ^ ^ (            ',
-		'===================================   ====='
+		'                                           ',
+		'                          ^ ^            () ',
+		'==================================   ======'
 	];
 
 	const levelCfg = {
 		width: 20,
 		height: 20,
 		'=': [ sprite('block'), solid() ],
-		'$': [ sprite('coin') ],
+		$: [ sprite('coin') ],
 		'%': [ sprite('surprise'), solid(), 'coin-surprise' ],
 		'*': [ sprite('surprise'), solid(), 'mushroom-surprise' ],
-		'}': [ sprite('pipe-bottom-left'), solid() ],
+		'(': [ sprite('pipe-bottom-left'), solid() ],
 		')': [ sprite('pipe-bottom-right'), solid(), scale(0.5) ],
-		'(': [ sprite('pipe-bottom-left'), solid() ]
+		'+': [ sprite('pipe-top-left'), solid() ],
+		'-': [ sprite('pipe-top-right'), solid() ],
+		'^': [ sprite('evil-shroom'), solid() ],
+		'#': [ sprite('mushroom'), solid() ]
 	};
 
 	const gameLevel = addLevel(map, levelCfg);
+
+	const player = add([ sprite('mario'), solid(), pos(30, 0), body(), origin('bot') ]);
 });
 
 start('game');
