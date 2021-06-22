@@ -6,6 +6,9 @@ kaboom({
 	clearColor: [ 0, 0, 0, 1 ]
 });
 
+const MOVE_SPEED = 120
+const JUMP_FORCE = 360
+
 loadRoot('https://i.imgur.com/');
 loadSprite('coin', 'wbKxhcd.png');
 loadSprite('evil-shroom', 'KPO3fR9.png');
@@ -67,10 +70,31 @@ scene('game', () => {
     add([text('level ' + 'test', pos(4,6))])
 
     const player = add([ sprite('mario'), solid(), pos(30, 0), body(), origin('bot') ]);
-    
-    keyDown('left', ()=> {
-        player.move(120, 0)
-    })
+	
+	
+
+
+
+    keyDown('right', () => {
+        player.move(MOVE_SPEED, 0)
+	})
+	keyDown('left', () => {
+        player.move(-MOVE_SPEED, 0)
+	})
+
+
+	keyPress('space', () => {
+		if (player.grounded()) {
+			player.jump(JUMP_FORCE)
+		}
+	})
+
+
+	
+
+
+
+
 });
 
 start('game');
